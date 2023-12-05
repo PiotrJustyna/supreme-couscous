@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+
+  localstack:
+    container_name: "supreme-couscous-localstack"
+    image: "localstack/localstack"
+    ports:
+      - "127.0.0.1:4566:4566"
+      - "127.0.0.1:4510-4559:4510-4559"
+    environment:
+      - "DEBUG=${DEBUG-}"
+      - "DOCKER_HOST=unix:///var/run/docker.sock"
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+  argon:
+    container_name: "supreme-couscous-argon"
+    image: "piotrjustyna/argon:1.1"
+    stdin_open: "true"                           # equivalent of docker run -i, also does not exit argon on ctrl+c
+    tty: "true"                                  # equivalent of docker run -t
+    depends_on:
+      - "localstack"
+    working_dir: "$WORKING_DIRECTORY"
+    entrypoint: "./entrypoint.sh $WORKING_DIRECTORY"
+    volumes:
+      - "./:$WORKING_DIRECTORY"
+      - "$CERTIFICATE_DIRECTORY:$HOME_DIRECTORY/.ssh:ro"
