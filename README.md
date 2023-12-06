@@ -44,5 +44,5 @@ aws secretsmanager create-secret --name test-secret-1 --secret-string file://sec
 
 ## resources
 
-* [Retrieve secrets from AWS Secrets Manager(https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets.html)
+* [Retrieve secrets from AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets.html)
 * [Retrieve AWS Secrets Manager secrets in .NET applications](https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets_cache-net.html) - this is about caching as the caching package is the preferred/recommended way of interacting with the secrets manager.
