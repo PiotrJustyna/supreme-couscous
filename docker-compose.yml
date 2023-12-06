@@ -3,7 +3,6 @@ version: "3.8"
 services:
 
   localstack:
-    container_name: "supreme-couscous-localstack"
     image: "localstack/localstack"
     ports:
       - "127.0.0.1:4566:4566"
@@ -17,7 +16,9 @@ services:
 
   argon:
     container_name: "supreme-couscous-argon"
-    image: "piotrjustyna/argon:1.1"
+    build:
+      context: .
+      dockerfile: dockerfile
     stdin_open: "true"                           # equivalent of docker run -i, also does not exit argon on ctrl+c
     tty: "true"                                  # equivalent of docker run -t
     depends_on:
