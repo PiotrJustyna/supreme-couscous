@@ -16,4 +16,15 @@ aws configure set aws_secret_access_key S3RVER
 
 aws configure set region us-east-1
 
+# --- populating secrets ----------------------- #
+
+touch secrets.json
+
+echo "{ \"username\": \"admin\", \"password\": \"password\" }" >> secrets.json
+
+aws secretsmanager create-secret \
+  --name test-secret-1 \
+  --secret-string file://secrets.json \
+  --endpoint-url "http://localstack:4566" > /dev/null
+
 /bin/zsh
