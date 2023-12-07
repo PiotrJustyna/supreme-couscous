@@ -14,7 +14,7 @@ type VanillaWorker(logger : ILogger<VanillaWorker>) =
   let _logger = logger
 
   override _.ExecuteAsync(stoppingToken : CancellationToken) =
-    let f : Task<unit> = task {
+    task {
       let secretsConfig = AmazonSecretsManagerConfig()
       secretsConfig.ServiceURL <- "http://localstack:4566"
 
@@ -29,5 +29,3 @@ type VanillaWorker(logger : ILogger<VanillaWorker>) =
 
         do! Task.Delay(5000)
     }
-
-    f
