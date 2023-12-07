@@ -23,8 +23,8 @@ touch secrets.json
 echo "{ \"username\": \"admin\", \"password\": \"password\" }" >> secrets.json
 
 aws secretsmanager create-secret \
-  --name test-secret-1 \
-  --secret-string file://secrets.json \
-  --endpoint-url "http://localstack:4566" > /dev/null
+  --name "test-secret" \
+  --secret-string "file://secrets.json" \
+  --endpoint-url "http://localstack:4566" > \/dev/null
 
 /bin/zsh
